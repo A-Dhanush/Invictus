@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invictus: CMS Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='invictus_logo.png') }}" alt="Invictus CMS Scanner Logo">
+        <h1>Invictus: CMS Scanner</h1>
+    </header>
+    <main>
+        <section class="scan-form">
+            <h2>Scan a Website</h2>
+            <form id="scan-form" action="/scan" method="post">
+                <label for="website">Enter URL to Scan:</label>
+                <input type="text" name="website" id="website" required>
+                <input type="submit" value="Scan">
+            </form>
+        </section>
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="scan-results">
+            <h2>Scan Results:</h2>
+            <pre>{{ scan_results | safe }}</pre>
+        </div>
+
+         <!-- Generate the "Download Report" link with proper URL encoding -->
+         <div class="download-report">
+            <a href="{{ url_for('download_report', param=param) }}" class="btn btn-primary">Download Report</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Invictus CMS Scanner</p>
+    </footer>
+</body>
+</html>
 
