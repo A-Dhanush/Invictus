@@ -38,7 +38,7 @@ def cms_scan(cms_name, param):
                 scan_output = subprocess.check_output(["wpscan", "--url", param, "--no-banner", "--random-user-agent", "aggressive"], stderr=subprocess.STDOUT)
             elif cms_name == "Joomla":
                 print ("!---Starting Joomla Scan---!")
-                scan_output = subprocess.check_output(["perl", "joomscan.pl", "-u", param], cwd="/Users/dhanush/Downloads/Project/Tools/joomscan", stderr=subprocess.STDOUT)
+                scan_output = subprocess.check_output(["perl", "joomscan.pl", "-u", param], cwd="/Invictus/Tools/joomscan", stderr=subprocess.STDOUT)
             elif cms_name == "Drupal":
                 print ("!---Starting Drupal Scan---!")
                 scan_output = subprocess.check_output(["droopescan", "scan", "drupal", "-u", param], stderr=subprocess.STDOUT)
