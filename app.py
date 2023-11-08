@@ -19,7 +19,7 @@ def scan():
     
     try:
         param = request.form.get('website', '')
-        key = 'w9ujn4cqdh29bhfcxok9hy825tcwn24aoank7knkyvom0o1kuj66t42r1sb5dkligjqg9o'  # Replace with your API key
+        key = ' YOUR KEY '  # Replace with your API key
 
         if not param:
             flash('Website URL is required.', 'error')
@@ -50,16 +50,13 @@ def scan():
 @app.route('/download_report/<param>')
 def download_report(param):
     sanitized_param = "".join(c for c in param if c.isalnum() or c in ('-', '_'))
-    file_path = f"reports/cms_scan_{sanitized_param}.txt"
+    file_path = os.path.join(os.path.dirname(__file__), 'reports', f"cms_scan_{sanitized_param}.txt")
 
     if os.path.exists(file_path):
-        # Use quote to ensure proper URL encoding
-        encoded_param = quote(param)
-        return send_file(file_path, as_attachment=True, download_name=f"cms_scan_{encoded_param}.txt")
+        encoded_param = quote(sanitized_param)
+        return send_from_directory(os.path.dirname(file_path), f"cms_scan_{sanitized_param}.txt", as_attachment=True, download_name=f"cms_scan_{encoded_param}.txt")
     else:
         flash(f'Report file not found for {param}.', 'error')
         return redirect(url_for('index'))
 
-if __name__ == '__main__':
-    app.run(debug=True)
 
