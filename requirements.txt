@@ -1,0 +1,6 @@
+flask
+droopescan
+subprocess
+requests
+ansi2html
+urllib3
